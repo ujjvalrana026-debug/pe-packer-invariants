@@ -1,0 +1,166 @@
+
+======================================================================
+  STATIC FORENSIC FEATURE VISIBILITY REPORT  v4
+======================================================================
+  Total samples   : 362
+  Malware samples : 316
+  Benign baseline : 46  
+  Families        : Trickbot, emotet, formbook, lumma, sality, upatre, virut, zeus
+
+  Feature                                       Trickbot    emotet  formbook     lumma    sality    upatre     virut      zeus    FP%
+  ────────────────────────────────────────────  ────────  ────────  ────────  ────────  ────────  ────────  ────────  ────────  ─────
+  High entropy section (>7.0)                          51%       31%       89%       35%       82%       41%       64%       61%     7%
+  Suspicious section name                               2%        9%        6%       65%       42%       41%       64%       26%    17%
+  Raw/virtual size mismatch                             9%       49%        3%       58%       18%        8%       10%       29%     2%
+  Known packer section name                             0%        0%        0%        0%       16%       15%        5%       13%     0%
+  RWX (write+exec) section                              0%        0%        0%        0%      100%       15%       74%       21%     0%
+  Entry point in last section                           0%        0%        8%        0%       18%        0%       23%        3%     0%
+  Zero import table                                    21%        0%       11%        8%        0%        0%        0%        8%    15%
+  Few imports (<=5, hidden)                             2%        0%        6%        0%       10%        3%        5%        3%     0%
+  Unpacking imports (VirtualAlloc etc.)                63%       98%       81%       62%       58%       69%       44%       55%    74%
+  Process injection imports                             0%       13%       72%       19%       14%        3%       18%       11%    22%
+  Anti-analysis imports                                58%       96%       83%       92%       90%       72%       69%       66%    83%
+  Crypto API imports                                    0%        4%        0%        0%        2%        0%        0%        0%     2%
+  Network / C2 API imports                              0%        4%       72%        4%       14%        3%       26%       24%    20%
+  Dynamic import resolution                            58%       96%       78%       65%       72%       44%       51%       53%    26%
+  Has digital signature                                12%       11%        3%       50%       22%        5%        0%        0%    98%
+  Has debug directory                                  42%       24%       33%       31%        8%       10%       36%        8%   100%
+  Has TLS directory                                     0%        4%       61%        4%       22%        3%        8%        5%    48%
+  Has overlay data                                     47%       16%        8%       12%       54%       82%       36%       61%    98%
+  PE checksum is zero                                  47%       58%       67%       35%      100%       51%      100%       58%     0%
+  Timestamp anomaly                                     0%        2%        0%       38%       12%        8%       18%        3%    65%
+  No ASLR/DEP mitigations                              51%       42%        3%        0%       80%       69%       95%       79%     0%
+  URL / domain strings                                 23%       20%       11%       42%       56%       21%       54%       37%    98%
+  Shell command strings                                 0%        4%        0%        0%        4%        3%       28%        3%     9%
+  Registry strings                                     16%       20%        0%       19%       24%        3%       28%       11%     0%
+  Crypto-related strings                               28%       27%       11%       85%       24%        5%       36%       11%     7%
+  Injection-related strings                             0%        4%        0%       38%       16%        0%        3%        0%    22%
+  Network/C2 strings                                   67%       84%       94%      100%       78%       28%       67%       61%    26%
+  Mutex name strings                                    5%       11%       11%       65%       12%        5%       28%        8%    20%
+  Dynamic API name strings                             74%       98%       83%       85%       84%       67%       82%       89%    74%
+  Hardcoded User-Agent strings                          0%        0%        3%        0%        2%        0%       18%       21%     0%
+  Base64-encoded blobs                                 95%       38%       86%       73%       48%       46%       62%       50%    57%
+  Hardcoded file-path strings                          79%       49%       81%       92%       56%       31%       44%       55%    46%
+
+──────────────────────────────────────────────────────────────────────
+  TEMPORAL STABILITY ANALYSIS  (Tier 1 features by era)
+  Addresses dissertation gap: 'no temporal analysis despite timestamps'
+──────────────────────────────────────────────────────────────────────
+
+  Trickbot — feature visibility by compile year
+  Feature                               <2015    2015-19    2020-22
+                                        (n=4)      (n=7)     (n=32)
+  ────────────────────────────────  ─────────  ─────────  ─────────
+  PE checksum zero                           0%         0%        62%
+  RWX section                                0%         0%         0%
+  No ASLR/DEP                                0%        86%        50%
+  Unpacking imports                          0%       100%        62%
+  Dyn. resolution                          100%         0%        66%
+  Dyn. API strings                         100%       100%        66%
+  Anti-analysis imports                    100%        14%        62%
+
+  emotet — feature visibility by compile year
+  Feature                             2015-19    2020-22      2023+
+                                       (n=13)     (n=26)      (n=5)
+  ────────────────────────────────  ─────────  ─────────  ─────────
+  PE checksum zero                           8%        85%        60%
+  RWX section                                0%         0%         0%
+  No ASLR/DEP                               92%        15%        40%
+  Unpacking imports                        100%       100%       100%
+  Dyn. resolution                          100%       100%        80%
+  Dyn. API strings                         100%       100%       100%
+  Anti-analysis imports                    100%        96%       100%
+
+  formbook — feature visibility by compile year
+  Feature                             2015-19    2020-22      2023+
+                                        (n=2)      (n=2)     (n=32)
+  ────────────────────────────────  ─────────  ─────────  ─────────
+  PE checksum zero                          50%       100%        66%
+  RWX section                                0%         0%         0%
+  No ASLR/DEP                                0%         0%         3%
+  Unpacking imports                          0%         0%        91%
+  Dyn. resolution                            0%         0%        88%
+  Dyn. API strings                          50%         0%        91%
+  Anti-analysis imports                     50%         0%        91%
+
+  lumma — feature visibility by compile year
+  Feature                               <2015    2015-19    2020-22      2023+
+                                        (n=2)      (n=1)      (n=2)     (n=11)
+  ────────────────────────────────  ─────────  ─────────  ─────────  ─────────
+  PE checksum zero                           0%       100%         0%        64%
+  RWX section                                0%         0%         0%         0%
+  No ASLR/DEP                                0%         0%         0%         0%
+  Unpacking imports                          0%       100%         0%        45%
+  Dyn. resolution                          100%       100%       100%        45%
+  Dyn. API strings                         100%       100%       100%        64%
+  Anti-analysis imports                    100%       100%       100%        82%
+
+  sality — feature visibility by compile year
+  Feature                               <2015    2015-19    2020-22
+                                       (n=31)     (n=10)      (n=8)
+  ────────────────────────────────  ─────────  ─────────  ─────────
+  PE checksum zero                         100%       100%       100%
+  RWX section                              100%       100%       100%
+  No ASLR/DEP                               94%        60%        50%
+  Unpacking imports                         52%        70%        75%
+  Dyn. resolution                           77%        60%        75%
+  Dyn. API strings                          84%        80%       100%
+  Anti-analysis imports                     94%        90%        88%
+
+  upatre — feature visibility by compile year
+  Feature                               <2015    2015-19    2020-22      2023+
+                                       (n=30)      (n=5)      (n=1)      (n=1)
+  ────────────────────────────────  ─────────  ─────────  ─────────  ─────────
+  PE checksum zero                          50%        40%         0%       100%
+  RWX section                               17%        20%         0%         0%
+  No ASLR/DEP                               70%        60%       100%         0%
+  Unpacking imports                         67%       100%         0%         0%
+  Dyn. resolution                           50%        40%         0%         0%
+  Dyn. API strings                          63%       100%         0%         0%
+  Anti-analysis imports                     70%       100%         0%         0%
+
+  virut — feature visibility by compile year
+  Feature                               <2015    2015-19
+                                       (n=31)      (n=8)
+  ────────────────────────────────  ─────────  ─────────
+  PE checksum zero                         100%       100%
+  RWX section                               94%         0%
+  No ASLR/DEP                               97%        88%
+  Unpacking imports                         55%         0%
+  Dyn. resolution                           65%         0%
+  Dyn. API strings                          81%        88%
+  Anti-analysis imports                     87%         0%
+
+  zeus — feature visibility by compile year
+  Feature                               <2015    2015-19
+                                       (n=31)      (n=7)
+  ────────────────────────────────  ─────────  ─────────
+  PE checksum zero                          68%        14%
+  RWX section                               26%         0%
+  No ASLR/DEP                               77%        86%
+  Unpacking imports                         52%        71%
+  Dyn. resolution                           48%        71%
+  Dyn. API strings                          94%        71%
+  Anti-analysis imports                     65%        71%
+
+──────────────────────────────────────────────────────────────────────
+  NUMERIC AVERAGES (malware families vs benign baseline):
+──────────────────────────────────────────────────────────────────────
+  Feature                                       Trickbot    emotet  formbook     lumma    sality    upatre     virut      zeus    BEN
+  Sections (avg)                                     4.53      4.60      4.50      8.19      4.52      4.15      5.18      3.66    5.80
+  Import count (avg)                               172.74    174.69    394.06    223.62    138.90     59.08    100.03     94.61   169.50
+  Packing score /10 (avg)                            2.56      3.16      2.78      2.27      4.54      2.64      3.72      3.24    1.24
+  Triage score /100 (avg)                           36.98     41.67     46.25     42.38     57.78     35.10     52.13     42.00   31.65
+  File entropy (avg)                                 6.57      6.57      7.20      6.96      7.12      5.36      6.35      6.96    6.11
+  Max section entropy (avg)                          6.79      6.94      7.73      7.04      7.56      6.65      6.82      7.01    5.98
+  URL count (avg)                                    1.98      2.73      0.08      0.85      3.92      0.13      1.46      0.53   11.33
+  IP count (avg)                                     0.19      1.22      1.19      0.62      1.02      0.28      1.79      0.18    0.11
+  Ordinal-only ratio (avg)                           0.01      0.00      0.00      0.01      0.02      0.01      0.04      0.08    0.00
+
+──────────────────────────────────────────────────────────────────────
+  INTERPRETATION:
+  Feature >80% malware + <10% FP  → Tier 1 forensic indicator
+  Feature >80% malware + 10-30% FP → Tier 2: useful but needs context
+  Feature <50% malware             → Tier 3: family-specific only
+  Triage score mean >60 for malware + <20 for benign = good separation
+======================================================================
