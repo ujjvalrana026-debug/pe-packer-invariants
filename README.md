@@ -159,19 +159,7 @@ A critical finding from the benign baseline: **Pestudio v9.7** — a legitimate 
 
 ---
 
-## Citation
 
-If you use this dataset or framework in your research, please cite:
-
-```bibtex
-@article{AUTHOR_YEAR,
-  title   = {Structural Packer Invariants as Forensic Indicators for Polymorphic Malware Attribution: A Cross-Family Visibility Framework with Machine Learning Validation},
-  author  = {[Author]},
-  journal = {[Journal]},
-  year    = {2025},
-  url     = {[DOI or preprint link — update when available]}
-}
-```
 
 ---
 
