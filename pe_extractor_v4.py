@@ -4,38 +4,6 @@ EXHAUSTIVE STATIC PE FEATURE EXTRACTOR  ─  v4  (Forensically Explainable)
 Dissertation: Forensic Analysis of Polymorphic Malware Using Static Features
 Author: Ujjval Rana
 
-What is NEW in v4 vs v3
-───────────────────────
-1.  BENIGN BASELINE SUPPORT
-      •  Place clean Windows DLLs/EXEs in  samples/benign/
-      •  They are labelled  label="benign", is_malware=0  automatically
-      •  The summary report shows false-positive rates per feature
-         (how often each indicator fires on clean software)
-      •  This directly addresses the dissertation gap: "no benign baseline"
-
-2.  TRIAGE SCORING ENGINE
-      •  Every binary gets a  triage_score  (0–100) and  triage_tier
-         (CRITICAL / HIGH / MEDIUM / LOW / CLEAN)
-      •  Family matcher: compares indicator profile against the 9 known
-         malware family signatures and returns the closest match +
-         confidence label (STRONG / PROBABLE / WEAK / UNKNOWN)
-      •  Outputs  results/triage_report_v4.txt  — one decision block
-         per file, formatted for copy-paste into a dissertation appendix
-
-3.  TEMPORAL SPLIT ANALYSIS
-      •  Samples are auto-bucketed: pre-2020 / 2020-2022 / post-2022
-      •  Summary report shows per-bucket visibility rates for families
-         where multi-year samples exist (Trickbot, Emotet, Formbook …)
-      •  Addresses the dissertation gap: "you have timestamps but did
-         no temporal analysis"
-
-4.  FALSE POSITIVE RATE TABLE
-      •  Summary report now includes a column "FP%" (benign hit rate)
-         beside each feature's malware visibility rates
-      •  Features with low FP% + high malware visibility =
-         high-value triage indicators
-
-All v3 features and outputs are preserved unchanged.
 
 FOLDER STRUCTURE:
     samples/
