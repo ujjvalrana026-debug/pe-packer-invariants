@@ -5,15 +5,6 @@ Dissertation: Forensic Analysis of Polymorphic Malware Using Static Features
 Author: Ujjval Rana
 
 
-FOLDER STRUCTURE:
-    samples/
-        Trickbot/   ← malware zips or PE files
-        Emotet/
-        Zeus/
-        ...
-        benign/     ← clean Windows DLLs/EXEs (System32 etc.)
-    pe_extractor_v4.py
-
 OUTPUT:
     results/pe_features_v4.csv          ← full feature table
     results/summary_report_v4.txt       ← visibility + FP rates + temporal
@@ -35,7 +26,7 @@ try:
 except ImportError:
     HAS_PYZIPPER = False
 
-# ── Configuration ──────────────────────────────────────────────────────────────
+# Configuration 
 SAMPLES_DIR            = "samples"
 OUTPUT_DIR             = "results"
 CSV_FILE               = os.path.join(OUTPUT_DIR, "pe_features_v4.csv")
@@ -48,9 +39,9 @@ ZIP_PASSWORDS          = [b"infected", b"Infected", b"INFECTED", b"malware", b"v
 # Folder name that is treated as benign baseline (case-insensitive)
 BENIGN_FOLDER_NAME     = "benign"
 
-# ──────────────────────────────────────────────────────────────────────────────
+
 #  FORENSIC LOOKUP TABLES
-# ──────────────────────────────────────────────────────────────────────────────
+
 
 PACKER_SECTIONS = {
     "upx0","upx1","upx2","upx!",".aspack",".adata","adata",
@@ -142,9 +133,8 @@ UA_RE  = re.compile(r'Mozilla/[0-9]\.[0-9][^\x00\n\r]{10,200}', re.IGNORECASE)
 B64_RE = re.compile(r'[A-Za-z0-9+/]{20,}={0,2}')
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 #  TRIAGE SCORING ENGINE  (NEW in v4)
-# ══════════════════════════════════════════════════════════════════════════════
 
 # Each rule: (feature_key, weight, description)
 # Weights are designed so that convergence of multiple indicators pushes
@@ -211,7 +201,7 @@ def triage_score(feat: dict) -> dict:
     return {"triage_score": score, "triage_tier": tier, "triage_fired": fired}
 
 
-# ── Family signature profiles ──────────────────────────────────────────────────
+# ── Family signature profiles
 # Built from Appendix B visibility data in the dissertation.
 # Format: {feature: (min_expected_visibility_pct, weight)}
 # Only features with >50% visibility for that family are included.
@@ -353,7 +343,7 @@ def temporal_bucket(year: int) -> str:
     return "2023_plus"
 
 
-# ── Helpers (unchanged from v3) ────────────────────────────────────────────────
+# ── Helpers (unchanged from v3) 
 
 def is_pe_bytes(d): return len(d) >= 2 and d[:2] == b"MZ"
 def is_pe_file(p):
@@ -429,7 +419,7 @@ def extract_urls_from_bytes(raw_bytes, decoded_strings):
     }
 
 
-# ── Zip handling (unchanged from v3) ──────────────────────────────────────────
+# ── Zip handling (unchanged from v3) 
 
 def read_zip_member(zpath, name, pwd):
     if HAS_PYZIPPER:
